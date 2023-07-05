@@ -14,7 +14,7 @@
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
                     <div>
-                        <a href="https://www.javaguides.net" class="navbar-brand"> HOUSE
+                        <a href="https://github.com/rjmdedil/HouseManagement.git" class="navbar-brand"> HOUSE
      Management App </a>
                     </div>
 
@@ -34,7 +34,7 @@
                     <div class="container text-left">
 
                         <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Add
-     New User</a>
+     New Meter Reading</a>
                     </div>
                     <br>
                     <table class="table table-bordered">
@@ -62,7 +62,7 @@
                                     </td>
 
 
-                                    <td><a href="SelectMeterRead?housenum=<c:out value='${house.housenum}' />">Select</a><a href="edit?housenum=<c:out value='${house.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${house.housenum}' />">Delete</a></td>
+                                    <td><a href="edit?housenum=<c:out value='${house.housenum}' />">Select</a><a href="edit?housenum=<c:out value='${house.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${house.housenum}' />">Delete</a></td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->
