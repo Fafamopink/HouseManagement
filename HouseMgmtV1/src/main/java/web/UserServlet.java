@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.HOUSEDAO; // 1st step import the DAO
+import DAO.MeterReadingDAO;
 import model.HOUSESDATA;// 2nd step to 
+import model.MeterReadModel;
 
 
 /**
@@ -26,9 +28,12 @@ import model.HOUSESDATA;// 2nd step to
 public class UserServlet extends HttpServlet {
     private static final long serialVersionUID = 1 ;
     private HOUSEDAO hOUSEDAO;
+    private MeterReadingDAO meterreadingdao;
+
 
     public void init() {
         hOUSEDAO = new HOUSEDAO(); // so we can call the obj for HOUSEDAO
+        meterreadingdao = new MeterReadingDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,6 +61,9 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "/update":
                 	updateHouse(request, response);
+                    break;
+                case "/SelectMeterRead":
+                	listMeterReading(request, response);
                     break;
                 default:
                 	listHOUSES(request, response);
@@ -115,5 +123,12 @@ public class UserServlet extends HttpServlet {
         hOUSEDAO.deleteHouse(id);
         response.sendRedirect("list");
 
+    }
+    private void listMeterReading(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, IOException, ServletException {
+        List<MeterReadModel> listreading = meterreadingdao.ViewAllHouseReading();
+        request.setAttribute("listHOUSES", listreading);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ShowMeterRead.jsp");
+        dispatcher.forward(request, response);
     }
 }
