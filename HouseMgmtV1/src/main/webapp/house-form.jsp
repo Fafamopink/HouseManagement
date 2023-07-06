@@ -52,7 +52,7 @@
                         
                         <c:if test="${user == null}">
                         <form  action="insert" method="post" >
-                        <label>House ID</label> <input type="text"  name="housenum"   class="form-control"  required="required">
+
                         <label>House Name</label> <input type="text" name="housename" class="form-control"  required="required">
                         <button type="submit" class="btn btn-success">Save</button>
                         </form>

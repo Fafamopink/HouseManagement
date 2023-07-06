@@ -111,9 +111,9 @@ public class UserServlet extends HttpServlet {
 
     private void insertHouse(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException {
-        int housenum = Integer.parseInt(request.getParameter("housenum"));//get parameter means getting the data from the jsp ,
+       // int housenum = Integer.parseInt(request.getParameter("housenum"));//get parameter means getting the data from the jsp ,
         String housename = request.getParameter("housename");//parameters will be pass to HOUSEDATA(classname notsure**) model
-        HOUSESDATA newHouse = new HOUSESDATA(housenum, housename); //int  and string name will be pass here
+        HOUSESDATA newHouse = new HOUSESDATA(housename); //int  and string name will be pass here
         hOUSEDAO.insertHouse(newHouse);
         response.sendRedirect("list");
     }

@@ -14,6 +14,14 @@ public class HOUSESDATA {
 
 
 	    }
+	    
+	    //test for automatic increment
+	    public HOUSESDATA (String housename) {
+	        this.housename = housename;
+
+
+	    }
+	    
 
 
 

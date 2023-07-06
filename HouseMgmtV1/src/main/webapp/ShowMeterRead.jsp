@@ -79,7 +79,7 @@
                                     </td>
 
 
-                                    <td><a href="deleteReading?entryIDMR=<c:out value='${mrdata.entryIDMR}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${mrdata.entryIDMR}' />">Delete</a></td>
+                                    <td><a href="deleteReading?entryIDMR=<c:out value='${mrdata.entryIDMR}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="deleteReading?entryIDMR=<c:out value='${mrdata.entryIDMR}' />">Delete</a></td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->

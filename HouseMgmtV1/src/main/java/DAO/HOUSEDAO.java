@@ -43,16 +43,18 @@ public class HOUSEDAO {
     public void insertHouse(HOUSESDATA housedata) throws SQLException, SQLTimeoutException {
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
-        		PreparedStatement statement = connection.prepareStatement("INSERT INTO housenumber VALUES  (?, ? )");)
+        		PreparedStatement statement = connection.prepareStatement("INSERT INTO housenumber VALUES  (housenumseq.NEXTVAL, ? )");)
         {
-        	statement.setInt(1, housedata.getHousenum());
-        	statement.setString(2, housedata.getHousename());
+        //	statement.setInt(1, housedata.getHousenum());
+        	statement.setString(1, housedata.getHousename());
         	statement.executeQuery();
             System.out.println("insert track");
         } catch (SQLException e) {
             printSQLException(e);
         }
     }
+    
+    
 
     public HOUSESDATA selectHouse(int id)throws SQLException, SQLTimeoutException {
     	HOUSESDATA houseinfo = null;
