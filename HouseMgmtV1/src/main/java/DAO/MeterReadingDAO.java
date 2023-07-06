@@ -43,33 +43,26 @@ public class MeterReadingDAO {
     }
 
 
-
-    public MeterReadModel ViewHouseReading(int id)throws SQLException, SQLTimeoutException {
-    	MeterReadModel MeterReadinfo = null;
-        // Step 1: Establishing a Connection
-        try (Connection connection = getConnection();
-            // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from meterreading where housenum =?");) 
-        {
-        	preparedStatement.setInt(1, id);// set the "?" to the value of the 1st param      	
-            System.out.println("View Reading Track");
-            // Step 3: Execute the query or update query
-            ResultSet rs = preparedStatement.executeQuery();
-            System.out.println("select track");
-
-            // Step 4: Process the ResultSet object.
-            while (rs.next()) {
-                int reading = rs.getInt("reading");
-                Date date = rs.getDate("date");
-                String notes = rs.getString("notes");
-                int housenum = rs.getInt("housenum");
-                MeterReadinfo = new MeterReadModel(reading,date,notes,housenum);
-            }            
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-        return MeterReadinfo;
-    }
+	/*
+	 * public MeterReadModel ViewAllHouseReading(int id)throws SQLException,
+	 * SQLTimeoutException { MeterReadModel MeterReadinfo = null; // Step 1:
+	 * Establishing a Connection try (Connection connection = getConnection(); //
+	 * Step 2:Create a statement using connection object PreparedStatement
+	 * preparedStatement =
+	 * connection.prepareStatement("select * from meterreading");) {
+	 * preparedStatement.setInt(1, id);// set the "?" to the value of the 1st param
+	 * System.out.println("View Reading Track"); // Step 3: Execute the query or
+	 * update query ResultSet rs = preparedStatement.executeQuery();
+	 * System.out.println("select track");
+	 * 
+	 * // Step 4: Process the ResultSet object. while (rs.next()) { int reading =
+	 * rs.getInt("reading"); Date date1 = rs.getDate("date1"); String notes =
+	 * rs.getString("notes"); int housenum = rs.getInt("housenum"); MeterReadinfo =
+	 * new MeterReadModel(reading,date1,notes,housenum); } } catch (SQLException e)
+	 * { printSQLException(e); } return MeterReadinfo; }
+	 */
+    
+    
     
     
     public List < MeterReadModel > ViewAllHouseReading() throws SQLException, SQLTimeoutException {
@@ -79,18 +72,21 @@ public class MeterReadingDAO {
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
             // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from meterreading where housenum =?");) {
-            // Step 3: Execute the query or update query
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from meterreading");) 
+        {
+        	System.out.println("ViewAllHouseReading track initial");
+        	// Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 int reading = rs.getInt("reading");
-                Date date = rs.getDate("date");
+                Date date1 = rs.getDate("date1");
                 String notes = rs.getString("notes");
-                int housenum = rs.getInt("housenum");
-                MeterReadinfo.add(new MeterReadModel(reading,date,notes,housenum));
+                int housenum1 = rs.getInt("housenum");
+                MeterReadinfo.add(new MeterReadModel(reading,date1,notes,housenum1));
             }
+            System.out.println("ViewAllHouseReading track final");
         } catch (SQLException e) {
             printSQLException(e);
         }

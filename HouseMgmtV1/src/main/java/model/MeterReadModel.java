@@ -6,14 +6,14 @@ import java.util.Date;
 public class MeterReadModel {
 	
 	
-	public MeterReadModel(int reading, Date date, String notes, int housenum) {
+	public MeterReadModel(int reading, Date date1, String notes, int housenum) {
 		this.reading = reading;
-		this.date = date;
+		this.date1 = date1;
 		this.notes = notes;
 		this.housenum = housenum;
 	}
 	private int reading;
-	 private Date date;
+	 private Date date1;
 	 private String notes;
 	 private int housenum;
 
@@ -23,11 +23,11 @@ public class MeterReadModel {
 	public void setReading(int reading) {
 		this.reading = reading;
 	}
-	public Date getDate() {
-		return date;
+	public Date getDate1() {
+		return date1;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate1(Date date1) {
+		this.date1 = date1;
 	}
 	public String getNotes() {
 		return notes;

@@ -19,6 +19,9 @@
                     <ul class="navbar-nav">
                         <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Users</a></li>
                     </ul>
+                     <ul class="navbar-nav">
+                        <li><a href="<%=request.getContextPath()%>//SelectAllRead" class="nav-link">ALL READING</a></li>
+                    </ul>
                 </nav>
             </header>
             <br>
@@ -29,10 +32,10 @@
                         <caption>
                             <h2>
                                 <c:if test="${user != null}">
-                                    Edit User
+                                    Edit House
                                 </c:if>
                                 <c:if test="${user == null}">
-                                    Add New User
+                                    Add New House
                                 </c:if>
                             </h2>
                         </caption>

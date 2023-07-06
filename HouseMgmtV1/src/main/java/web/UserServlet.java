@@ -62,8 +62,11 @@ public class UserServlet extends HttpServlet {
                 case "/update":
                 	updateHouse(request, response);
                     break;
-                case "/SelectMeterRead":
-                	listMeterReading(request, response);
+				/*
+				 * case "/SelectMeterRead": listAllMeterReading(request, response); break;
+				 */
+                case "/SelectAllRead":
+                	listAllRead(request, response);
                     break;
                 default:
                 	listHOUSES(request, response);
@@ -124,11 +127,23 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect("list");
 
     }
-    private void listMeterReading(HttpServletRequest request, HttpServletResponse response)
+	/*
+	 * private void listAllMeterReading(HttpServletRequest request,
+	 * HttpServletResponse response) throws SQLException, IOException,
+	 * ServletException { List<MeterReadModel> listreading =
+	 * meterreadingdao.ViewHouseReading(1); request.setAttribute("listMeterReading",
+	 * listreading); RequestDispatcher dispatcher =
+	 * request.getRequestDispatcher("ShowMeterRead.jsp");
+	 * dispatcher.forward(request, response); }
+	 */
+    
+    private void listAllRead(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, ServletException {
-        List<MeterReadModel> listreading = meterreadingdao.ViewAllHouseReading();
-        request.setAttribute("listHOUSES", listreading);
+        List < MeterReadModel > listHOUSES1 = meterreadingdao.ViewAllHouseReading();
+        request.setAttribute("listHOUSES", listHOUSES1);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ShowMeterRead.jsp");
         dispatcher.forward(request, response);
     }
+    
+    
 }

@@ -29,7 +29,7 @@
                 <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
 
                 <div class="container">
-                    <h3 class="text-center">List of Users</h3>
+                    <h3 class="text-center">List of Readings</h3>
                     <hr>
                     <div class="container text-left">
 
@@ -40,23 +40,33 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>HOUSE NUMBER</th>
-                                <th>HOUSE NAME</th>
-
-
+                                <th>READING</th>
+                                <th>DATE</th>
+								<th>NOTES</th>
+								<th>HOUSE NUMBER</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!--   for (Todo todo: todos) {  -->
-                            <c:forEach var="house" items="${listHOUSES}">
+                            <c:forEach var="house" items="${listMeterReading}">
                              <!--//items is the arraylist on the servelet  -->
                                 <tr>
                                     <td>
-                                        <c:out value="${house.housenum}" />
+                                        <c:out value="${listMeterReading.reading}" />
                                         <!-- housenum here is the housenum on the model  -->
                                     </td>
                                     <td>
-                                        <c:out value="${house.housename}" />
+                                        <c:out value="${listMeterReading.date}" />
+                                  <!-- housename here is the housename on the model  -->
+                                        
+                                    </td>
+                                                                        <td>
+                                        <c:out value="${listMeterReading.notes}" />
+                                  <!-- housename here is the housename on the model  -->
+                                        
+                                    </td>
+                                                                        <td>
+                                        <c:out value="${listMeterReading.housenum}" />
                                   <!-- housename here is the housename on the model  -->
                                         
                                     </td>
