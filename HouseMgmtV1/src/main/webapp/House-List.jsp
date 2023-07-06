@@ -42,10 +42,8 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>HOUSE NUMBER</th>
                                 <th>HOUSE NAME</th>
-
-
+                                <th>OPTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,17 +52,11 @@
                              <!--//items is the arraylist on the servelet  -->
                                 <tr>
                                     <td>
-                                        <c:out value="${house.housenum}" />
-                                        <!-- housenum here is the housenum on the model  -->
-                                    </td>
-                                    <td>
                                         <c:out value="${house.housename}" />
                                   <!-- housename here is the housename on the model  -->
                                         
                                     </td>
-
-
-                                    <td><a href="ViewHouseReading?housenum=<c:out value='${house.housenum}' />">Select</a><a href="edit?housenum=<c:out value='${house.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${house.housenum}' />">Delete</a></td>
+                                    <td><a href="ViewHouseReading?housenum=<c:out value='${house.housenum}' />">Select</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="edit?housenum=<c:out value='${house.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${house.housenum}' />">Delete</a></td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->
