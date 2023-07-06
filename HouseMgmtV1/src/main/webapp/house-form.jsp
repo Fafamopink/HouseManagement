@@ -13,15 +13,14 @@
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
                     <div>
-                        <a href="https://www.javaguides.net" class="navbar-brand"> House Management App </a>
+                        <a href="https://github.com/rjmdedil/HouseManagement" class="navbar-brand"> House Management App </a>
                     </div>
 
                     <ul class="navbar-nav">
-                        <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Users</a></li>
+                        <li><a href="<%=request.getContextPath()%>/list" class="nav-link">ALL HOUSES</a></li>
+                        <li><a href="<%=request.getContextPath()%>/SelectAllRead" class="nav-link">ALL READING</a></li>
                     </ul>
-                     <ul class="navbar-nav">
-                        <li><a href="<%=request.getContextPath()%>//SelectAllRead" class="nav-link">ALL READING</a></li>
-                    </ul>
+
                 </nav>
             </header>
             <br>
@@ -42,7 +41,7 @@
 
                         <c:if test="${user != null}">
                         <form action="update" method="post" >
-                        <label>House ID</label> 
+                        <label>House ID1</label> 
                         <input type="text" name="housenum" value="<c:out value='${user.housenum}' />" />
 	                    <label>House Name</label> <input type="text"  value="<c:out value='${user.housename}' />" class="form-control" name="housename" required="required">
                         <button type="submit"class="btn btn-success" >Save</button>

@@ -19,7 +19,8 @@
                     </div>
 
                     <ul class="navbar-nav">
-                        <li><a href="<%=request.getContextPath()%>/list" class="nav-link">Users</a></li>
+                        <li><a href="<%=request.getContextPath()%>/SelectAllRead" class="nav-link">METER READ LIST</a></li>
+                        <li><a href="<%=request.getContextPath()%>/list" class="nav-link">HOUSE LIST</a></li>
                     </ul>
                 </nav>
             </header>
@@ -48,31 +49,31 @@
                         </thead>
                         <tbody>
                             <!--   for (Todo todo: todos) {  -->
-                            <c:forEach var="house" items="${listMeterReading}">
+                            <c:forEach var="mrdata" items="${listMeterReading}">
                              <!--//items is the arraylist on the servelet  -->
                                 <tr>
                                     <td>
-                                        <c:out value="${listMeterReading.reading}" />
+                                        <c:out value="${mrdata.reading}" />
                                         <!-- housenum here is the housenum on the model  -->
                                     </td>
                                     <td>
-                                        <c:out value="${listMeterReading.date}" />
+                                        <c:out value="${mrdata.date}" />
                                   <!-- housename here is the housename on the model  -->
                                         
                                     </td>
                                                                         <td>
-                                        <c:out value="${listMeterReading.notes}" />
+                                        <c:out value="${mrdata.notes}" />
                                   <!-- housename here is the housename on the model  -->
                                         
                                     </td>
                                                                         <td>
-                                        <c:out value="${listMeterReading.housenum}" />
+                                        <c:out value="${mrdata.housenum}" />
                                   <!-- housename here is the housename on the model  -->
                                         
                                     </td>
 
 
-                                    <td><a href="edit?housenum=<c:out value='${house.housenum}' />">Select</a><a href="edit?housenum=<c:out value='${house.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${house.housenum}' />">Delete</a></td>
+                                    <td><a href="edit?housenum=<c:out value='${mrdata.housenum}' />">Select</a><a href="edit?housenum=<c:out value='${mrdata.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${mrdata.housenum}' />">Delete</a></td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->

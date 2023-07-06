@@ -139,8 +139,8 @@ public class UserServlet extends HttpServlet {
     
     private void listAllRead(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, ServletException {
-        List < MeterReadModel > listHOUSES1 = meterreadingdao.ViewAllHouseReading();
-        request.setAttribute("listHOUSES", listHOUSES1);
+        List < MeterReadModel > MRALLDATA = meterreadingdao.ViewAllHouseReading();
+        request.setAttribute("listMeterReading", MRALLDATA);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ShowMeterRead.jsp");
         dispatcher.forward(request, response);
     }
