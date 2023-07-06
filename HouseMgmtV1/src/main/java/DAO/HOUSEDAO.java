@@ -18,35 +18,35 @@ public class HOUSEDAO {
     String jdbcPassword = "dev1xd";
 
     public  Connection getConnection() throws SQLException, SQLTimeoutException {
-        
+
     	Connection connection=null;
         try {
             //Class.forName("com.mysql.jdbc.Driver");
             /////for MySql connection
-            Class.forName(DB_DRIVER); 
-             connection= DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);  
+            Class.forName(DB_DRIVER);
+             connection= DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
  }
 
-        catch(Exception e) {     
-       	 System.out.println(e.getStackTrace()); 
+        catch(Exception e) {
+       	 System.out.println(e.getStackTrace());
         }
 		/*
 		 * catch(Exception ex) { System.out.println(ex.getMessage()); }
 		 */
 
-		
+
 		return connection;
-        
-		
+
+
     }
 
     public void insertHouse(HOUSESDATA housedata) throws SQLException, SQLTimeoutException {
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection();
-        		PreparedStatement statement = connection.prepareStatement("INSERT INTO housenumber VALUES  (?, ? )");) 
+        		PreparedStatement statement = connection.prepareStatement("INSERT INTO housenumber VALUES  (?, ? )");)
         {
         	statement.setInt(1, housedata.getHousenum());
-        	statement.setString(2, housedata.getHousename());   
+        	statement.setString(2, housedata.getHousename());
         	statement.executeQuery();
             System.out.println("insert track");
         } catch (SQLException e) {
@@ -59,9 +59,9 @@ public class HOUSEDAO {
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
             // Step 2:Create a statement using connection object
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from housenumber where housenum =?");) 
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from housenumber where housenum =?");)
         {
-        	preparedStatement.setInt(1, id);// set the "?" to the value of the 1st param      	
+        	preparedStatement.setInt(1, id);// set the "?" to the value of the 1st param
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
@@ -72,7 +72,7 @@ public class HOUSEDAO {
                 int housenum = rs.getInt("housenum");
                 String housename = rs.getString("housename");
                 houseinfo = new HOUSESDATA(housenum, housename);
-            }            
+            }
         } catch (SQLException e) {
             printSQLException(e);
         }
@@ -99,8 +99,8 @@ public class HOUSEDAO {
         } catch (SQLException e) {
             printSQLException(e);
         }
-        catch(Exception ex) {     
-       	 System.out.println(ex.getMessage());            
+        catch(Exception ex) {
+       	 System.out.println(ex.getMessage());
        }
         return houseinfo;
     }
@@ -108,17 +108,17 @@ public class HOUSEDAO {
 	/*
 	 * public void deleteHouse(int housenum) throws SQLException,
 	 * SQLTimeoutException {
-	 * 
+	 *
 	 * try { Connection connection = getConnection(); PreparedStatement statement =
 	 * connection.prepareStatement("delete from housenumber where id = ?",
 	 * housenum);
-	 * 
-	 * 
+	 *
+	 *
 	 * int rowsUpdated = statement.executeUpdate(); if (rowsUpdated > 0) {
 	 * System.out.println("An existing user was updated successfully!"); }
-	 * 
+	 *
 	 * }catch (SQLException e) { printSQLException(e); }
-	 * 
+	 *
 	 * }
 	 */
     public void deleteHouse (int id) throws SQLException {
@@ -131,16 +131,16 @@ public class HOUSEDAO {
             	System.out.println("row deleted");        }
 
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     public void updateHouse(HOUSESDATA housedataupdate) throws SQLException, SQLTimeoutException {
-        
+
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("update housenumber set housename = ? where housenum = ?");){
 
-     
+
             statement.setString(1, housedataupdate.getHousename());
            	statement.setInt(2, housedataupdate.getHousenum());
 
@@ -156,8 +156,8 @@ public class HOUSEDAO {
         }catch (SQLException e) {
             printSQLException(e);
         }
-        catch(Exception ex) {     
-       	 System.out.println(ex.getMessage());   
+        catch(Exception ex) {
+       	 System.out.println(ex.getMessage());
         }
     }
 
@@ -177,6 +177,6 @@ public class HOUSEDAO {
         }
     }
 
-    
-    
+
+
 }

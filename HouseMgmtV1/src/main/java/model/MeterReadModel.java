@@ -4,18 +4,30 @@ import java.util.Date;
 // generate of constructor
 //on eclipse click source then generate constructor using the fields
 public class MeterReadModel {
-	
-	
-	public MeterReadModel(int reading, Date date1, String notes, int housenum) {
+
+
+	public MeterReadModel(int reading, Date date1, String notes, int housenum,int entryIDMR) {
 		this.reading = reading;
 		this.date1 = date1;
 		this.notes = notes;
 		this.housenum = housenum;
+		this.entryIDMR = entryIDMR;
+		
 	}
-	private int reading;
+	 private int reading;
 	 private Date date1;
 	 private String notes;
 	 private int housenum;
+	 
+	 
+	 
+	 public int getEntryIDMR() {
+		return entryIDMR;
+	}
+	public void setEntryIDMR(int entryIDMR) {
+		this.entryIDMR = entryIDMR;
+	}
+	private int entryIDMR;
 
 	 public int getReading() {
 		return reading;
@@ -42,7 +54,7 @@ public class MeterReadModel {
 		this.housenum = housenum;
 	}
 
-	 
+
 	 // generate of constructor
 
 }

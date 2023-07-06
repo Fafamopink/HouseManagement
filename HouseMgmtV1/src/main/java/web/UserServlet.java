@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.HOUSEDAO; // 1st step import the DAO
 import DAO.MeterReadingDAO;
-import model.HOUSESDATA;// 2nd step to 
+import model.HOUSESDATA;// 2nd step to
 import model.MeterReadModel;
 
 
@@ -21,7 +21,7 @@ import model.MeterReadModel;
  * ControllerServlet.java
  * This servlet acts as a page controller for the application, handling all
  * requests from the user.
- * 
+ *
  */
 
 @WebServlet("/")
@@ -31,17 +31,20 @@ public class UserServlet extends HttpServlet {
     private MeterReadingDAO meterreadingdao;
 
 
-    public void init() {
+    @Override
+	public void init() {
         hOUSEDAO = new HOUSEDAO(); // so we can call the obj for HOUSEDAO
         meterreadingdao = new MeterReadingDAO();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         doGet(request, response);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String action = request.getServletPath();
 
@@ -53,7 +56,7 @@ public class UserServlet extends HttpServlet {
                 case "/insert":
                     insertHouse(request, response);
                     break;
-                case "/delete":
+                case "/delete":// this part is writen on the jsp"delete'
                     deleteUser(request, response);
                     break;
                 case "/edit":
@@ -62,11 +65,16 @@ public class UserServlet extends HttpServlet {
                 case "/update":
                 	updateHouse(request, response);
                     break;
-				/*
-				 * case "/SelectMeterRead": listAllMeterReading(request, response); break;
-				 */
+				
+				case "/ViewHouseReading": 
+					ViewHouseReading(request, response);
+					break;
+				 
                 case "/SelectAllRead":
                 	listAllRead(request, response);
+                    break;
+                case "/deleteReading":// this part is written on the jsp"delete'
+                	deleteReading(request, response);
                     break;
                 default:
                 	listHOUSES(request, response);
@@ -114,7 +122,7 @@ public class UserServlet extends HttpServlet {
     throws SQLException, IOException {
         int housenum = Integer.parseInt(request.getParameter("housenum")); //get parameter means getting the data from the jsp ,double checked this is sure
         String housename = request.getParameter("housename");//get the data on html page
-       
+
         HOUSESDATA book = new HOUSESDATA(housenum, housename);//put the data on bok obj
         hOUSEDAO.updateHouse(book);//
         response.sendRedirect("list");
@@ -127,16 +135,16 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect("list");
 
     }
-	/*
-	 * private void listAllMeterReading(HttpServletRequest request,
-	 * HttpServletResponse response) throws SQLException, IOException,
-	 * ServletException { List<MeterReadModel> listreading =
-	 * meterreadingdao.ViewHouseReading(1); request.setAttribute("listMeterReading",
-	 * listreading); RequestDispatcher dispatcher =
-	 * request.getRequestDispatcher("ShowMeterRead.jsp");
-	 * dispatcher.forward(request, response); }
-	 */
-    
+	
+	 private void ViewHouseReading(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException,
+	  ServletException { 
+      int id = Integer.parseInt(request.getParameter("housenum"));
+	  List<MeterReadModel> listreading = meterreadingdao.ViewHouseReading(id);
+	  request.setAttribute("listMeterReading",listreading);	  
+	  RequestDispatcher dispatcher =request.getRequestDispatcher("ShowMeterRead.jsp");
+	  dispatcher.forward(request, response); }
+	 
+
     private void listAllRead(HttpServletRequest request, HttpServletResponse response)
     throws SQLException, IOException, ServletException {
         List < MeterReadModel > MRALLDATA = meterreadingdao.ViewAllHouseReading();
@@ -146,4 +154,13 @@ public class UserServlet extends HttpServlet {
     }
     
     
+    private void deleteReading(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, IOException {
+        int id = Integer.parseInt(request.getParameter("entryIDMR"));//means huse num odisplayed or already on the page
+        meterreadingdao.deleteReading(id);
+        response.sendRedirect("list");
+
+    }
+
+
 }

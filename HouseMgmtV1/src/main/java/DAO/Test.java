@@ -1,8 +1,5 @@
 package DAO;
 
-
-import java.sql.*;
-
 public class Test {
 
 /*
@@ -12,13 +9,13 @@ public class Test {
         String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
         String jdbcUsername = "system";
         String jdbcPassword = "dev1xd";
-        
+
         Connection connection = null;
         try {
             //Class.forName("com.mysql.jdbc.Driver");
             /////for MySql connection
 			Class.forName(DB_DRIVER);
-            
+
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
 			if(connection != null){
 				   System.out.println("Successfully connected.");
@@ -34,6 +31,6 @@ public class Test {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
+
     }*/
 }

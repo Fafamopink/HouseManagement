@@ -64,7 +64,7 @@
                                     </td>
 
 
-                                    <td><a href="SelectMeterRead?housenum=<c:out value='${house.housenum}' />">Select</a><a href="edit?housenum=<c:out value='${house.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${house.housenum}' />">Delete</a></td>
+                                    <td><a href="ViewHouseReading?housenum=<c:out value='${house.housenum}' />">Select</a><a href="edit?housenum=<c:out value='${house.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${house.housenum}' />">Delete</a></td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->

@@ -1,7 +1,7 @@
 package model;
 
 public class HOUSESDATA {
-	
+
 	    protected int housenum;
 	    protected String housename;
 
@@ -35,5 +35,5 @@ public class HOUSESDATA {
 
 
 
-	
+
 }

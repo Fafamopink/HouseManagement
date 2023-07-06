@@ -45,6 +45,7 @@
                                 <th>DATE</th>
 								<th>NOTES</th>
 								<th>HOUSE NUMBER</th>
+								<th>READING ID</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,8 +58,8 @@
                                         <!-- housenum here is the housenum on the model  -->
                                     </td>
                                     <td>
-                                        <c:out value="${mrdata.date}" />
-                                  <!-- housename here is the housename on the model  -->
+                                        <c:out value="${mrdata.date1}" />
+                                  <!-- housename here is the housename on the model so ey should be the same .ex error if not the saame Property [date] not found on type [model.MeterReadModel]  -->
                                         
                                     </td>
                                                                         <td>
@@ -71,9 +72,14 @@
                                   <!-- housename here is the housename on the model  -->
                                         
                                     </td>
+                                                                                              <td>
+                                        <c:out value="${mrdata.entryIDMR}" />
+                                  <!-- housename here is the housename on the model  -->
+                                        
+                                    </td>
 
 
-                                    <td><a href="edit?housenum=<c:out value='${mrdata.housenum}' />">Select</a><a href="edit?housenum=<c:out value='${mrdata.housenum}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${mrdata.housenum}' />">Delete</a></td>
+                                    <td><a href="deleteReading?entryIDMR=<c:out value='${mrdata.entryIDMR}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?housenum=<c:out value='${mrdata.entryIDMR}' />">Delete</a></td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->
