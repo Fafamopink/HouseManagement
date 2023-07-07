@@ -34,7 +34,7 @@ public class UserServlet extends HttpServlet {
     @Override
 	public void init() {
         hOUSEDAO = new HOUSEDAO(); // so we can call the obj for HOUSEDAO
-        meterreadingdao = new MeterReadingDAO();
+        meterreadingdao = new MeterReadingDAO(0, null, null, 0, 0);
     }
 
     @Override
@@ -75,6 +75,14 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "/deleteReading":// this part is written on the jsp"delete'
                 	deleteReading(request, response);
+                    break;
+                    
+                case "/NewMeterRead":// this part is written on the jsp"delete'
+                	showADDFormMR(request, response);
+                    break;
+                    
+                case "/editReading":// this part is written on the jsp"delete'
+                	showEditFormMR(request, response);
                     break;
                 default:
                 	listHOUSES(request, response);
@@ -160,7 +168,24 @@ public class UserServlet extends HttpServlet {
         meterreadingdao.deleteReading(id);
         response.sendRedirect("list");
 
-    }
+    }    
+    private void showADDFormMR(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, ServletException, IOException {
+       // int id = Integer.parseInt(request.getParameter("housenum"));//can get, Cannot parse null string    
+        
+          //means we will get the data from the model
+        RequestDispatcher dispatcher = request.getRequestDispatcher("MR-Form.jsp");
+        dispatcher.forward(request, response);
 
+    }
+    private void showEditFormMR(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("entryIDMR"));
+        MeterReadingDAO existingMR = meterreadingdao.selectMR(id);  //means we will get the data from the model
+        RequestDispatcher dispatcher = request.getRequestDispatcher("MR-Form.jsp");
+        request.setAttribute("user", existingMR);
+        dispatcher.forward(request, response);
+
+    }
 
 }

@@ -34,7 +34,7 @@
                     <hr>
                     <div class="container text-left">
 
-                        <a href="<%=request.getContextPath()%>/new" class="btn btn-success">Add
+                        <a href="<%=request.getContextPath()%>/NewMeterRead" class="btn btn-success">Add
      New Meter Reading</a>
                     </div>
                     <br>
@@ -79,7 +79,7 @@
                                     </td>
 
 
-                                    <td><a href="deleteReading?entryIDMR=<c:out value='${mrdata.entryIDMR}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="deleteReading?entryIDMR=<c:out value='${mrdata.entryIDMR}' />">Delete</a></td>
+                                    <td><a href="editReading?entryIDMR=<c:out value='${mrdata.entryIDMR}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="deleteReading?entryIDMR=<c:out value='${mrdata.entryIDMR}' />">Delete</a></td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->

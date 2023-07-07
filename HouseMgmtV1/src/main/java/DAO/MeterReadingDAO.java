@@ -19,6 +19,11 @@ public class MeterReadingDAO {
 	String jdbcUsername = "system";
 	String jdbcPassword = "dev1xd";
 
+	public MeterReadingDAO(int reading, Date date1, String notes, int housenum, int entryIDMR) {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public Connection getConnection() throws SQLException, SQLTimeoutException {
 
 		Connection connection = null;
@@ -90,10 +95,10 @@ public class MeterReadingDAO {
 				int reading = rs.getInt("reading");
 				Date date1 = rs.getDate("date1");
 				String notes = rs.getString("notes");
-				int housenum1 = rs.getInt("housenum");
+				int housenum = rs.getInt("housenum");
 				int entryIDMR = rs.getInt("entryIDMR");
 
-				MeterReadinfo.add(new MeterReadModel(reading, date1, notes, housenum1, entryIDMR));
+				MeterReadinfo.add(new MeterReadModel(reading, date1, notes, housenum, entryIDMR));
 			}
 			System.out.println("ViewAllHouseReading track final");
 		} catch (SQLException e) {
@@ -130,6 +135,56 @@ public class MeterReadingDAO {
 	 *
 	 * }
 	 */
+    public MeterReadingDAO selectMR(int id)throws SQLException, SQLTimeoutException {
+    	MeterReadingDAO MRDATA = null;
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from meterreading where entryIDMR  =?");)
+        {
+        	preparedStatement.setInt(1, id);// set the "?" to the value of the 1st param
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+            System.out.println("select track");
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int reading = rs.getInt("reading");
+                Date Date1 = rs.getDate("date1");
+                String notes = rs.getString("notes");
+                int housenum = rs.getInt("housenum");
+                int entryIDMR = rs.getInt("entryIDMR");
+                
+                		
+                MRDATA = new MeterReadingDAO(reading, Date1,notes,housenum,entryIDMR);
+
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return MRDATA;
+    }
+
+    public void insertMR(MeterReadModel MRD) throws SQLException, SQLTimeoutException {
+        // try-with-resource statement will auto close the connection.
+    	// MRD is crated object from MeterReadModel.so we can call the getters
+        try (Connection connection = getConnection();
+        		PreparedStatement statement = connection.prepareStatement("INSERT INTO meterreading VALUES  (?, ? , ? , ? , ? )");)
+        {
+
+        	statement.setInt(1, MRD.getReading());
+        	statement.setDate(2, (java.sql.Date) MRD.getDate1());
+        	statement.setString(3, MRD.getNotes());
+        	statement.setInt(4, MRD.getHousenum());
+        	statement.setInt(5, MRD.getEntryIDMR());
+
+        	statement.executeQuery();
+            System.out.println("insert MR track");
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
 
 	private void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
