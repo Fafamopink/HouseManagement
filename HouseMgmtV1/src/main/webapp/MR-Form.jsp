@@ -68,7 +68,7 @@
 						<option value="${mr.housenum}">${mr.housename}</option>    		
 						</c:forEach>
 						</select>
-                        <label>House IDMR</label> <input type="text" name="entryIDMR" class="form-control"  required="required">
+                        <label>IDMR</label> <input type="text" name="entryIDMR" class="form-control"  required="required">
                         <button type="submit" class="btn btn-success">Save</button>
                         </form>                                          
                         </c:if>
