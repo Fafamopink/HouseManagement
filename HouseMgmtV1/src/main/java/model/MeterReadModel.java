@@ -1,33 +1,13 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 // generate of constructor
 //on eclipse click source then generate constructor using the fields
 public class MeterReadModel {
 
 
-	public MeterReadModel(int reading, Date date1, String notes, int housenum,int entryIDMR) {
-		this.reading = reading;
-		this.date1 = date1;
-		this.notes = notes;
-		this.housenum = housenum;
-		this.entryIDMR = entryIDMR;
-		
-	}
-	 private int reading;
-	 private Date date1;
-	 private String notes;
-	 private int housenum;
-	 
-	 
-	 
-	 public int getEntryIDMR() {
-		return entryIDMR;
-	}
-	public void setEntryIDMR(int entryIDMR) {
-		this.entryIDMR = entryIDMR;
-	}
-	private int entryIDMR;
 
 	 public int getReading() {
 		return reading;
@@ -53,7 +33,33 @@ public class MeterReadModel {
 	public void setHousenum(int housenum) {
 		this.housenum = housenum;
 	}
+	public int getEntryIDMR() {
+		return entryIDMR;
+	}
+	public void setEntryIDMR(int entryIDMR) {
+		this.entryIDMR = entryIDMR;
+	}
+	public MeterReadModel(int reading, Date date1, String notes, int housenum, int entryIDMR) {
+		super();
+		this.reading = reading;
+		this.date1 = date1;
+		this.notes = notes;
+		this.housenum = housenum;
+		this.entryIDMR = entryIDMR;
+	}
 
+	public MeterReadModel(int reading2, LocalDateTime dateTime, String notes2, int housenum2, int entryIDMR2) {
+		// TODO Auto-generated constructor stub
+	}
+
+	private int reading;
+	 private Date date1;
+	 private String notes;
+	 private int housenum;
+	 private int entryIDMR;
+	 
+	 
+	 
 
 	 // generate of constructor
 

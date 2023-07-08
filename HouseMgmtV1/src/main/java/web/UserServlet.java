@@ -1,8 +1,14 @@
 package web;
+import java.sql.Date;  
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +40,7 @@ public class UserServlet extends HttpServlet {
     @Override
 	public void init() {
         hOUSEDAO = new HOUSEDAO(); // so we can call the obj for HOUSEDAO
-        meterreadingdao = new MeterReadingDAO(0, null, null, 0, 0);
+        meterreadingdao = new MeterReadingDAO();
     }
 
     @Override
@@ -78,11 +84,21 @@ public class UserServlet extends HttpServlet {
                     break;
                     
                 case "/NewMeterRead":// this part is written on the jsp"delete'
-                	showADDFormMR(request, response);
+                	showADDFormMR(request, response);//showADDFormMR is method here in cotroller 
                     break;
+                    
+                    
+                case "/insertMR":// this part is written on the jsp"delete'
+                	insertMR(request, response);//showADDFormMR is method here in cotroller 
+                    break;
+                    
                     
                 case "/editReading":// this part is written on the jsp"delete'
                 	showEditFormMR(request, response);
+                    break;
+
+                case "/updateReading":// this part is written on the jsp"delete'
+                	updateMR(request, response);
                     break;
                 default:
                 	listHOUSES(request, response);
@@ -90,7 +106,10 @@ public class UserServlet extends HttpServlet {
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
-        }
+        } catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     private void listHOUSES(HttpServletRequest request, HttpServletResponse response)
@@ -143,14 +162,15 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect("list");
 
     }
-	
+	// code block to see MR of selected house already fix shouldnt be changed
 	 private void ViewHouseReading(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException,
 	  ServletException { 
       int id = Integer.parseInt(request.getParameter("housenum"));
 	  List<MeterReadModel> listreading = meterreadingdao.ViewHouseReading(id);
 	  request.setAttribute("listMeterReading",listreading);	  
 	  RequestDispatcher dispatcher =request.getRequestDispatcher("ShowMeterRead.jsp");
-	  dispatcher.forward(request, response); }
+	  dispatcher.forward(request, response); 
+	  }
 	 
 
     private void listAllRead(HttpServletRequest request, HttpServletResponse response)
@@ -170,22 +190,72 @@ public class UserServlet extends HttpServlet {
 
     }    
     private void showADDFormMR(HttpServletRequest request, HttpServletResponse response)
-    throws SQLException, ServletException, IOException {
-       // int id = Integer.parseInt(request.getParameter("housenum"));//can get, Cannot parse null string    
+    throws SQLException, ServletException, IOException, ParseException {
+//code block to show housename
+        List < HOUSESDATA > listofhousename = hOUSEDAO.selectAllHouses();
+        request.setAttribute("listHOUSES1", listofhousename);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("MR-Form.jsp");
+        dispatcher.forward(request, response);
+        ////issue on this part
+      
+    }
+    //showing jsp,is different to insering the data since inseting is an action
+    private void insertMR(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, IOException {
+        int reading = Integer.parseInt(request.getParameter("reading"))     ;//parameters will be pass to HOUSEDATA(classname notsure**) model
+        String date1 = request.getParameter("date1");
+        String notes = request.getParameter("notes");
+        int housenum  = Integer.parseInt(request.getParameter("housenum"));
+        int entryIDMR = Integer.parseInt(request.getParameter("entryIDMR"));
+        Date date=Date.valueOf(date1);        
+        System.out.println("String converted to java.sql.Date :" + date);
+        MeterReadModel newMR = new MeterReadModel(reading, date, notes, housenum, entryIDMR);
+        meterreadingdao.insertMR(newMR);
+        response.sendRedirect("list"); 
+    }
+    
+    
+    
+    
+    
+    private void showEditFormMR(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, ServletException, IOException, ParseException {
+        //parsing 
+        int id = Integer.parseInt(request.getParameter("entryIDMR"));//housenum s the param also in the jsp
+        MeterReadModel existingHouse = meterreadingdao.selectMR(id);
+        request.setAttribute("listHOUSES", existingHouse);
+        //displaying list of hosuename for each in jsp
+        List < HOUSESDATA > listofhousename = hOUSEDAO.selectAllHouses(); 
+        request.setAttribute("listHOUSES1", listofhousename);
+        request.setAttribute("user", existingHouse);
         
-          //means we will get the data from the model
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("MR-Form.jsp");
         dispatcher.forward(request, response);
 
     }
-    private void showEditFormMR(HttpServletRequest request, HttpServletResponse response)
-    throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("entryIDMR"));
-        MeterReadingDAO existingMR = meterreadingdao.selectMR(id);  //means we will get the data from the model
-        RequestDispatcher dispatcher = request.getRequestDispatcher("MR-Form.jsp");
-        request.setAttribute("user", existingMR);
-        dispatcher.forward(request, response);
+    
+    
+    private void updateMR(HttpServletRequest request, HttpServletResponse response)
+    throws SQLException, IOException, ParseException {
+    	  int reading = Integer.parseInt(request.getParameter("reading"))     ;//parameters will be pass to HOUSEDATA(classname notsure**) model
+          String date1 = request.getParameter("date1");
+          System.out.println(date1);
+          String notes = request.getParameter("notes");
+          int housenum  = Integer.parseInt(request.getParameter("housenum"));
+          int entryIDMR = Integer.parseInt(request.getParameter("entryIDMR"));
+          
+          //last issue here,since i still cannt convert the date
+          
+        
+          Date date=Date.valueOf(date1);
+     
 
+          System.out.println("String converted to java.sql.Date :" + date);
+          MeterReadModel newMR = new MeterReadModel(reading, date, notes, housenum, entryIDMR);
+           meterreadingdao.updateHouse(newMR);// meterreadingdao is object to call the class and updatehouse is a   method inside the class
+           response.sendRedirect("list");
+    	
     }
 
 }

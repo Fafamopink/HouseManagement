@@ -38,25 +38,19 @@
                                 </c:if>
                             </h2>
                         </caption>
-<div class="dropdown">
-  <button class="dropbtn">Dropdown</button>
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div>
                         <c:if test="${user != null}">	
-                        <form action="updateMR" method="post" >
-                        <label>Reading</label> <input type="text" name="reading" class="form-control"  required="required">
-						<label>Date</label> <input type="date" name="date1" class="form-control"  required="required">
-						<label>Notes</label> <input type="text" name="notes" class="form-control"  required="required">
-						<label>House Num</label> <input type="text" name="housenum"   <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>class="form-control"  required="required">
-                        <label>House IDMR</label> <input type="text" name="entryIDMR" class="form-control"  required="required">
+                        <form action="updateReading" method="post" >
+                        <label>Reading</label> <input type="text" name="reading" value="<c:out value='${user.reading}' />" class="form-control"  required="required">
+						<label>Date</label> <input type="date" name="date1" value="<c:out value='${user.date1}' />" class="form-control"  required="required">
+						<label>Notes</label> <input type="text" name="notes" value="<c:out value='${user.notes}' />" class="form-control"  required="required">
+						<label>House Numasd</label>					
+						<select name="housenum" class="form-control">
+						<c:forEach var="mr" items="${listHOUSES1}">
+						<option value="${mr.housenum}">${mr.housename}</option>    							
+						</c:forEach>
+						</select>
+						
+                        <label>House IDMR</label> <input type="text" name="entryIDMR" value="<c:out value='${user.entryIDMR}' />" class="form-control"  required="required">
                         <button type="submit"class="btn btn-success" >Save</button>
                         </form>                      
                         </c:if>
@@ -64,11 +58,16 @@
                         
                         
                         <c:if test="${user == null}">
-                        <form  action="insertNEWMR" method="post" >
+                        <form  action="insertMR" method="post" >
                         <label>Reading</label> <input type="text" name="reading" class="form-control"  required="required">
 						<label>Date</label> <input type="date" name="date1" class="form-control"  required="required">
 						<label>Notes</label> <input type="text" name="notes" class="form-control"  required="required">
-						<label>House Num</label> <input type="text" name="housenum" value='${user.housename}'  class="form-control"  required="required">
+						<label>House Numasd</label>
+						<select name="housenum" class="form-control">
+						<c:forEach var="mr" items="${listHOUSES1}">
+						<option value="${mr.housenum}">${mr.housename}</option>    		
+						</c:forEach>
+						</select>
                         <label>House IDMR</label> <input type="text" name="entryIDMR" class="form-control"  required="required">
                         <button type="submit" class="btn btn-success">Save</button>
                         </form>                                          
